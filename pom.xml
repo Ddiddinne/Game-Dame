@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <groupId>org.dame.isen.jee</groupId>
+  <groupId>org.dmetzler.isen.jee</groupId>
   <artifactId>jee-bootstrap-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Puissance 4 :: parent</name>
