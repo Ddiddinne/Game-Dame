@@ -19,12 +19,11 @@ public class DameGameTest {
     @Test
     public void canInstanciateTheGame(){
         assertThat(game).isNotNull();
-    }
-
-    @Test
-    public void playerMove(){
-        /*game.play();
-        assertThat().isEqualTo(1);*/
+        assertThat(game.getCell("A",1)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("G",1)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("I",1)).isNull();
+        assertThat(game.getCell("B",1)).isNull();
+        assertThat(game.getCell("B",8)).isEqualTo(Piece.BLACK);
     }
 
 }
