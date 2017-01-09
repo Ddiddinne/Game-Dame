@@ -52,6 +52,10 @@ public class DameGameTest {
         game.play("D", 6, direction1);
         assertThat(game.getCell("D", 6)).isNull();
         assertThat(game.getCell("E", 5)).isEqualTo(Piece.BLACK);
+
+        game.play("D", 8, direction1);
+        assertThat(game.getCell("D", 8)).isEqualTo(Piece.BLACK);
+
     }
 
 }
