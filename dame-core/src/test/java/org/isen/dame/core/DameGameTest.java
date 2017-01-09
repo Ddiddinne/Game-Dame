@@ -21,4 +21,10 @@ public class DameGameTest {
         assertThat(game).isNotNull();
     }
 
+    @Test
+    public void playerMove(){
+        /*game.play();
+        assertThat().isEqualTo(1);*/
+    }
+
 }

@@ -5,7 +5,7 @@ package org.isen.dame.core;
  */
 public interface DameGame {
 
-    void play(Piece piece, int column, int row);
+    void play(Piece piece, int column, int row, int direction);
 
     Piece getCell(int column, int row);
 
