@@ -26,4 +26,15 @@ public class DameGameTest {
         assertThat(game.getCell("B",8)).isEqualTo(Piece.BLACK);
     }
 
+    @Test
+    public void playerMove(){
+        game.play("A", 3, Direction.RIGHT);
+        assertThat(game.getCell("A", 3)).isNull();
+        assertThat(game.getCell("B", 4)).isEqualTo(Piece.WHITE);
+
+        game.play("E", 3, Direction.LEFT);
+        assertThat(game.getCell("E", 3)).isNull();
+        assertThat(game.getCell("D", 4)).isEqualTo(Piece.WHITE);
+    }
+
 }

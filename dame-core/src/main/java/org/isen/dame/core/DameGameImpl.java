@@ -34,8 +34,23 @@ public class DameGameImpl implements DameGame {
     }
 
     @Override
-    public void play(Piece colour, String column, int row, int direction) {
+    public void play(String column, int row, Direction direction) {
 
+        Piece piece = this.board.get(column+row);
+        this.board.put(column + row, null);
+        int ascii = column.charAt(0);
+
+        if (piece == Piece.WHITE) {
+            row++;
+            if (direction == Direction.RIGHT) {
+                ascii++;
+
+            } else {
+                ascii--;
+            }
+            column = Character.toString((char) ascii);
+            this.board.put(column + row, piece);
+        }
     }
 
     @Override
