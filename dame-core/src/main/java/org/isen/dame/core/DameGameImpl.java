@@ -25,7 +25,7 @@ public class DameGameImpl implements DameGame {
             }
         }
 
-        for (int j=COLUMNS_NUMBER; j>=COLUMNS_NUMBER/2+1; j--) {
+        for (int j=COLUMNS_NUMBER; j>COLUMNS_NUMBER/2+1; j--) {
             for(int l=65+(j+1)%2; l<=72; l+=2) {
                 String key = Character.toString((char)l) + j;
                 board.put(key, Piece.BLACK);
@@ -34,23 +34,15 @@ public class DameGameImpl implements DameGame {
     }
 
     @Override
-    public void play(String column, int row, Direction direction) {
+    public void play(String column, int row, HashMap<String,Integer> direction) {
 
         Piece piece = this.board.get(column+row);
         this.board.put(column + row, null);
         int ascii = column.charAt(0);
-
-        if (piece == Piece.WHITE) {
-            row++;
-            if (direction == Direction.RIGHT) {
-                ascii++;
-
-            } else {
-                ascii--;
-            }
-            column = Character.toString((char) ascii);
-            this.board.put(column + row, piece);
-        }
+        ascii+=direction.get("x");
+        row+=direction.get("y");
+        column = Character.toString((char) ascii);
+        this.board.put(column + row, piece);
     }
 
     @Override
