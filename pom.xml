@@ -18,7 +18,7 @@
   </properties>
 
   <modules>
-    <module>jee-bootstrap-core</module>
+    <module>dame-core</module>
     <!-- module>jee-bootstrap-jpa</module>
     <module>jee-bootstrap-web</module>
     <module>jee-bootstrap-rest</module -->
