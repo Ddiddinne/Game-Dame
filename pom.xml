@@ -19,8 +19,8 @@
 
   <modules>
     <module>dame-core</module>
-    <!-- module>jee-bootstrap-jpa</module>
-    <module>jee-bootstrap-web</module>
+    <module>dame-webapp</module>
+    <!--module>jee-bootstrap-web</module>
     <module>jee-bootstrap-rest</module -->
   </modules>
 
