@@ -1,0 +1,12 @@
+.case{
+    border-style: solid;
+    width:40px;
+    height:40px;
+    display:inline-block;
+}
+.brown{
+    background:#8B4513;
+}
+.white{
+    background:#FFFFFF;
+}
