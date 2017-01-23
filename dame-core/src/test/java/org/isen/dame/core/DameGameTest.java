@@ -26,7 +26,7 @@ public class DameGameTest {
         assertThat(game.getCell("G",1)).isEqualTo(Piece.WHITE);
         assertThat(game.getCell("I",1)).isNull();
         assertThat(game.getCell("B",1)).isNull();
-        assertThat(game.getCell("B",8)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("B",8)).isEqualTo(Piece.BROWN);
     }
 
     @Test
@@ -46,15 +46,15 @@ public class DameGameTest {
         direction1.put("y", -1);
         game.play("B", 6, direction1);
         assertThat(game.getCell("B", 6)).isNull();
-        assertThat(game.getCell("A", 5)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("A", 5)).isEqualTo(Piece.BROWN);
 
         direction1.put("x", 1);
         game.play("D", 6, direction1);
         assertThat(game.getCell("D", 6)).isNull();
-        assertThat(game.getCell("E", 5)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("E", 5)).isEqualTo(Piece.BROWN);
 
         game.play("D", 8, direction1);
-        assertThat(game.getCell("D", 8)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("D", 8)).isEqualTo(Piece.BROWN);
 
     }
 

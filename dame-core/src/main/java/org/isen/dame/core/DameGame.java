@@ -15,6 +15,6 @@ public interface DameGame {
 
     int getRowsNumber();
 
-    Piece getWiner();
+    Piece getWinner();
 
 }

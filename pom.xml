@@ -6,7 +6,7 @@
   <groupId>org.dame.isen.jee</groupId>
   <artifactId>jee-bootstrap-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Puissance 4 :: parent</name>
+  <name>Dame :: parent</name>
   <packaging>pom</packaging>
   <description></description>
 
@@ -20,8 +20,8 @@
   <modules>
     <module>dame-core</module>
     <module>dame-webapp</module>
-    <!--module>jee-bootstrap-web</module>
-    <module>jee-bootstrap-rest</module -->
+    <module>dame-jpa</module>
+    <!--<module>jee-bootstrap-rest</module -->
   </modules>
 
 
@@ -58,6 +58,7 @@
           <artifactId>embedded-glassfish-web-plugin</artifactId>
           <version>2.1</version>
         </plugin>
+
       </plugins>
     </pluginManagement>
   </build>

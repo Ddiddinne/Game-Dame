@@ -12,23 +12,21 @@
 
 <script type="text/javascript">
 	$(document).ready(function(e) {
-	for(var i=1; i<=10;i++){
+        for(var i=1; i<=8;i++){
 
-		var str="<div>";
-		for(var y=1; y<=10; y++){
-		    if((y+i)%2==0){
-		    str+="<div class='case brown'></div>";
-		    }else{
-		    str+="<div class='case white'></div>";
-		    }
+            var str="<div>";
+            for(var y=1; y<=8; y++){
+                if((y+i)%2==0){
+                str+="<div class='case white'></div>";
+                }else{
+                str+="<div class='case brown'></div>";
+                }
 
-		}
-		str+="</div>"
-		$("#board").append(str);
-		str="";
-    }
-
-		
+            }
+            str+="</div>"
+            $("#board").append(str);
+            str="";
+        }
 	});
 </script>
 </html>

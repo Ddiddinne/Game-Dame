@@ -28,7 +28,7 @@ public class DameGameImpl implements DameGame {
         for (int j=COLUMNS_NUMBER; j>COLUMNS_NUMBER/2+1; j--) {
             for(int l=65+(j+1)%2; l<=72; l+=2) {
                 String key = Character.toString((char)l) + j;
-                board.put(key, Piece.BLACK);
+                board.put(key, Piece.BROWN);
             }
         }
     }
@@ -65,7 +65,7 @@ public class DameGameImpl implements DameGame {
     }
 
     @Override
-    public Piece getWiner() {
+    public Piece getWinner() {
         return null;
     }
 }
