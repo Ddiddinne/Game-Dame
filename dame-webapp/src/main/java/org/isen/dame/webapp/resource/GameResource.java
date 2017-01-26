@@ -1,19 +1,20 @@
-package org.isen.dame.webapp.service;
+package org.isen.dame.webapp.resource;
 
 
+import org.isen.dame.webapp.service.Service;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.*;
 
-public class PostResource {
+public class GameResource {
 
-
-    public PostResource() {
-
-    }
+    private Service service = new Service();
 
     @Path("test")
     @GET
     public String doGet() {
-        return "Toto";
+        return service.createNewGame();
     }
 
     /*@PUT

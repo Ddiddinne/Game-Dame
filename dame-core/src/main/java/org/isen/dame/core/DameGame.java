@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 public interface DameGame {
 
-    void play(String column, int row, HashMap<String,Integer> direction);
+    void play(Piece color, Position init, Position destination);
 
     Piece getCell(String column, int row);
 

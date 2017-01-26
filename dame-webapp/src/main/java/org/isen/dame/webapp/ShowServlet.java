@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by Sandrine on 16/01/2017.
  */
-@WebServlet("/totoAdress")
+@WebServlet("/game/*")
 public class ShowServlet extends HttpServlet {
 
     @Override

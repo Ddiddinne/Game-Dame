@@ -34,27 +34,41 @@ public class DameGameTest {
         HashMap<String, Integer> direction1 = new HashMap<>();
         direction1.put("x",1);
         direction1.put("y",1);
-        game.play("A", 3, direction1);
+        Position posInit = new Position();
+        posInit.row = 3;
+        posInit.column = "A";
+        Position posFinal = new Position();
+        posFinal.row =4;
+        posFinal.column = "B";
+        game.play(Piece.WHITE, posInit, posFinal);
         assertThat(game.getCell("A", 3)).isNull();
         assertThat(game.getCell("B", 4)).isEqualTo(Piece.WHITE);
 
+
+        posInit.row = 3;
+        posInit.column = "E";
+        posFinal.row =4;
+        posFinal.column = "D";
         direction1.put("x",-1);
-        game.play("E", 3, direction1);
+        game.play(Piece.WHITE, posInit, posFinal);
         assertThat(game.getCell("E", 3)).isNull();
         assertThat(game.getCell("D", 4)).isEqualTo(Piece.WHITE);
 
-        direction1.put("y", -1);
-        game.play("B", 6, direction1);
+        posInit.row = 6;
+        posInit.column = "B";
+        posFinal.row =5;
+        posFinal.column = "A";
+        game.play(Piece.BLACK, posInit, posFinal);
         assertThat(game.getCell("B", 6)).isNull();
         assertThat(game.getCell("A", 5)).isEqualTo(Piece.BLACK);
 
-        direction1.put("x", 1);
-        game.play("D", 6, direction1);
+        posInit.row = 6;
+        posInit.column = "D";
+        posFinal.row =5;
+        posFinal.column = "E";
+        game.play(Piece.BLACK, posInit, posFinal);
         assertThat(game.getCell("D", 6)).isNull();
         assertThat(game.getCell("E", 5)).isEqualTo(Piece.BLACK);
-
-        game.play("D", 8, direction1);
-        assertThat(game.getCell("D", 8)).isEqualTo(Piece.BLACK);
 
     }
 
