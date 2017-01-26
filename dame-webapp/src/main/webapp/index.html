@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script type="text/javascript" src="jquery.1.8.3.min.js"></script>
 </head>
 <body>
-<h1>Dame</h1>
-<a href="totoAdress">Go!</a>
+
+<h1 id="title">Play</h1>
+<div id="board"></div>
 </body>
+
+<script type="text/javascript">
+	$(document).ready(function(e) {
+        for(var i=65; i<=72;i++){
+
+            var str="<div>";
+            for(var y=1; y<=8; y++){
+                if((y+i)%2==0){
+                str+="<div class='case brown' id = " + String.fromCharCode(i) + y + "></div>";
+                }else{
+                str+="<div class='case white' id = " + String.fromCharCode(i) + y + "></div>";
+                }
+
+            }
+            str+="</div>"
+            $("#board").append(str);
+            str="";
+        }
+
+
+
+        $.ajax({
+           url : '/dame-webapp/api/test',
+           type : 'GET'
+           })
+           .done(function(data){
+                $("#title").append(data);
+                console.log("toto");
+           })
+           .fail(function(jqXHR, textStatus){
+                console.log(textStatus);
+           });
+
+	});
+</script>
 </html>
