@@ -1,7 +1,5 @@
 package org.isen.dame.webapp.service;
 
-import org.isen.dame.webapp.dao.PostDAO;
-import org.isen.dame.webapp.model.Post;
 
 import javax.ws.rs.*;
 
