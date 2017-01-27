@@ -1,6 +1,7 @@
 package org.isen.dame.webapp.resource;
 
 
+import org.isen.dame.core.Chip;
 import org.isen.dame.core.Game;
 import org.isen.dame.webapp.service.Service;
 
@@ -8,18 +9,42 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
+import java.util.Map;
 
 @Produces(MediaType.APPLICATION_JSON)
 public class GameResource {
 
     private Service service = new Service();
 
-    @Path("test")
+    @Path("createGame")
     @GET
     @Produces("application/json")
-    public Game doGet() {
+    public Game createGame() {
         return service.createNewGame();
     }
+
+    @Path("getChips/{token}")
+    @GET
+    @Produces("application/json")
+    public List<Chip> getChips(@PathParam("token") String token) {
+        return service.getChips(token);
+    }
+
+    @Path("testGame")
+    @GET
+    @Produces("application/json")
+    public List<Game> testGame() {
+        return service.testGame();
+    }
+
+    @Path("testChip")
+    @GET
+    @Produces("application/json")
+    public List<Chip> testChip() {
+        return service.testChip();
+    }
+
 
     /*@PUT
     public Post doUpdate(Post updatedPost) {

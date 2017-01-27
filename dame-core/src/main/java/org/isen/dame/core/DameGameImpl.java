@@ -16,21 +16,22 @@ public class DameGameImpl implements DameGame {
         initBoard();
     }
 
-    private void initBoard(){
+    public Map<String, Piece> initBoard(){
 
         for (int j=1; j<=COLUMNS_NUMBER/2-1; j++) {
             for(int l=65+(j+1)%2; l<=72; l+=2) {
                 String key = Character.toString((char)l) + j;
-                board.put(key, Piece.WHITE);
+                board.put(key, Piece.BLACK);
             }
         }
 
         for (int j=COLUMNS_NUMBER; j>COLUMNS_NUMBER/2+1; j--) {
             for(int l=65+(j+1)%2; l<=72; l+=2) {
                 String key = Character.toString((char)l) + j;
-                board.put(key, Piece.BLACK);
+                board.put(key, Piece.WHITE);
             }
         }
+        return board;
     }
 
     @Override

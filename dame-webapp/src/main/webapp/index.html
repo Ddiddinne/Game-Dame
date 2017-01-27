@@ -15,10 +15,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(e) {
-        for(var i=65; i<=72;i++){
+        for(var y=1; y<=8; y++){
 
             var str="<div>";
-            for(var y=1; y<=8; y++){
+            for(var i=65; i<=72;i++){
                 if((y+i)%2==0){
                 str+="<div class='case brown' id = " + String.fromCharCode(i) + y + "></div>";
                 }else{
@@ -35,18 +35,37 @@
         console.log(token);
         if(token==null){
             $.ajax({
-               url : '/dame-webapp/api/test',
+               url : '/dame-webapp/api/createGame',
                type : 'GET',
                })
                .done(function(data){
                     $("#token").append(data.game.token);
-                    console.log(data.game);
+                    console.log(data);
                     //window.location.href = "/dame-webapp?token="+data.game.token;
+                    $.ajax({
+                       url : '/dame-webapp/api/getChips/' + data.game.token,
+                       type : 'GET'
+                       })
+                       .done(function(data){
+                            console.log(data);
+                            for(var y=0; y< data.chip.length; y++){
+                                console.log(data.chip[y].position + data.chip[y].piece);
+                                console.log($("#data.chip[y].position"));
+                                $("#"+data.chip[y].position).addClass("chip"+data.chip[y].piece.toLowerCase());
+
+                            }
+
+                       })
+                       .fail(function(jqXHR, textStatus){
+                            console.log(textStatus);
+                       });
 
                })
                .fail(function(jqXHR, textStatus){
                     console.log(textStatus);
                });
+
+
         }
         else{$("#title").html("In");}
 

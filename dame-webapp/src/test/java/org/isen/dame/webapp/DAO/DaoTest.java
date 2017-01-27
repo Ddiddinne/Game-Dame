@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
  * Created by Sandrine on 26/01/2017.
  */
 public class DaoTest {
-    private Dao dao = new Dao();
+    //private Dao dao = new Dao();
 
     @Ignore
     @Test

@@ -22,11 +22,11 @@ public class DameGameTest {
     @Test
     public void canInstanciateTheGame(){
         assertThat(game).isNotNull();
-        assertThat(game.getCell("A",1)).isEqualTo(Piece.WHITE);
-        assertThat(game.getCell("G",1)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("A",1)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("G",1)).isEqualTo(Piece.BLACK);
         assertThat(game.getCell("I",1)).isNull();
         assertThat(game.getCell("B",1)).isNull();
-        assertThat(game.getCell("B",8)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("B",8)).isEqualTo(Piece.WHITE);
     }
 
     @Test
@@ -40,9 +40,9 @@ public class DameGameTest {
         Position posFinal = new Position();
         posFinal.row =4;
         posFinal.column = "B";
-        game.play(Piece.WHITE, posInit, posFinal);
+        game.play(Piece.BLACK, posInit, posFinal);
         assertThat(game.getCell("A", 3)).isNull();
-        assertThat(game.getCell("B", 4)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("B", 4)).isEqualTo(Piece.BLACK);
 
 
         posInit.row = 3;
@@ -50,25 +50,25 @@ public class DameGameTest {
         posFinal.row =4;
         posFinal.column = "D";
         direction1.put("x",-1);
-        game.play(Piece.WHITE, posInit, posFinal);
+        game.play(Piece.BLACK, posInit, posFinal);
         assertThat(game.getCell("E", 3)).isNull();
-        assertThat(game.getCell("D", 4)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("D", 4)).isEqualTo(Piece.BLACK);
 
         posInit.row = 6;
         posInit.column = "B";
         posFinal.row =5;
         posFinal.column = "A";
-        game.play(Piece.BLACK, posInit, posFinal);
+        game.play(Piece.WHITE, posInit, posFinal);
         assertThat(game.getCell("B", 6)).isNull();
-        assertThat(game.getCell("A", 5)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("A", 5)).isEqualTo(Piece.WHITE);
 
         posInit.row = 6;
         posInit.column = "D";
         posFinal.row =5;
         posFinal.column = "E";
-        game.play(Piece.BLACK, posInit, posFinal);
+        game.play(Piece.WHITE, posInit, posFinal);
         assertThat(game.getCell("D", 6)).isNull();
-        assertThat(game.getCell("E", 5)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("E", 5)).isEqualTo(Piece.WHITE);
 
     }
 
