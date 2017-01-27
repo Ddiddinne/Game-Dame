@@ -7,8 +7,10 @@
 </head>
 <body>
 
+<div id = "token">token:</div>
 <h1 id="title">Play</h1>
 <div id="board"></div>
+
 </body>
 
 <script type="text/javascript">
@@ -34,12 +36,12 @@
         if(token==null){
             $.ajax({
                url : '/dame-webapp/api/test',
-               type : 'GET'
+               type : 'GET',
                })
                .done(function(data){
-                    $("#title").append(data);
-                    console.log("toto");
-                    window.location.href = "/dame-webapp?token="+data;
+                    $("#token").append(data.game.token);
+                    console.log(data.game);
+                    //window.location.href = "/dame-webapp?token="+data.game.token;
 
                })
                .fail(function(jqXHR, textStatus){

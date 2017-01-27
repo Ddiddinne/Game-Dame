@@ -1,7 +1,10 @@
 package org.isen.dame.webapp.DAO;
 
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.h2.jdbcx.JdbcConnectionPool;
+import org.isen.dame.core.Game;
+import org.isen.dame.core.Piece;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.util.StringMapper;
@@ -32,10 +35,15 @@ public class Dao {
 
     }
 
-    public String DacTest(){
+    public Game createGame(){
         dao.createTable();
-        dao.insert("Titi");
-        return dao.test(1);
+        Game game = new Game();
+        String token = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
+        Piece turn = Piece.WHITE;
+        game.setToken(token);
+        game.setCurrentTurn(turn);
+        dao.insert(token, turn.toString());
+        return game;
     }
 
 }

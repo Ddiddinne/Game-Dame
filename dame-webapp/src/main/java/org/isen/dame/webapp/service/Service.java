@@ -1,5 +1,6 @@
 package org.isen.dame.webapp.service;
 
+import org.isen.dame.core.Game;
 import org.isen.dame.webapp.DAO.Dao;
 import org.isen.dame.webapp.DAO.DaoInter;
 
@@ -13,8 +14,8 @@ import javax.inject.Provider;
 public class Service {
     private Dao dao = new Dao();
 
-    public String createNewGame(){
-        return dao.DacTest();
+    public Game createNewGame(){
+        return dao.createGame();
 
     }
 }

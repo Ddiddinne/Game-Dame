@@ -1,19 +1,23 @@
 package org.isen.dame.webapp.resource;
 
 
+import org.isen.dame.core.Game;
 import org.isen.dame.webapp.service.Service;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
+@Produces(MediaType.APPLICATION_JSON)
 public class GameResource {
 
     private Service service = new Service();
 
     @Path("test")
     @GET
-    public String doGet() {
+    @Produces("application/json")
+    public Game doGet() {
         return service.createNewGame();
     }
 
