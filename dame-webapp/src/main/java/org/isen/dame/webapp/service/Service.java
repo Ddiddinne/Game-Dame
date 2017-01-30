@@ -51,21 +51,50 @@ public class Service {
 
         boolean here = true;
 
-        for (int i=0; i<listChip.size(); i++){
-            Chip chip = listChip.get(i);
-            if (chip.getPosition().equals(casefinal)){
-                here = false;
+        Character columnInit = caseinit.charAt(0);
+        Character rowInit = caseinit.charAt(1);
+
+        Character columnFinal = casefinal.charAt(0);
+        Character rowFinal = casefinal.charAt(1);
+
+        if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==1) {
+            for (int i = 0; i < listChip.size(); i++) {
+                Chip chip = listChip.get(i);
+                if (chip.getPosition().equals(casefinal)) {
+                    here = false;
+                }
             }
-        }
-        if(here){
-            for (int j=0; j<listChip.size(); j++) {
-                Chip chip = listChip.get(j);
-                if (chip.getPosition().equals(caseinit)){
-                    chip.setPosition(casefinal);
-                    daoChip.updateChip(token, caseinit, casefinal);
+            if (here) {
+                for (int j = 0; j < listChip.size(); j++) {
+                    Chip chip = listChip.get(j);
+                    if (chip.getPosition().equals(caseinit)) {
+                        chip.setPosition(casefinal);
+                        daoChip.updateChip(token, caseinit, casefinal);
+                    }
+                }
+            }
+        }else if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==2) {
+            Character columnInter = (char)((columnInit+columnFinal)/2);
+            Character rowInter = (char)((rowInit+rowFinal)/2);
+            String positionInter = columnInter.toString() + rowInter;
+            here = false;
+            for (int i = 0; i < listChip.size(); i++) {
+                Chip chip = listChip.get(i);
+                if (chip.getPosition().equals(positionInter)) {
+                    here = true;
+                }
+            }
+            if(here){
+                for (int j = 0; j < listChip.size(); j++) {
+                    Chip chip = listChip.get(j);
+                    if (chip.getPosition().equals(caseinit)) {
+                        chip.setPosition(casefinal);
+                        daoChip.updateChip(token, caseinit, casefinal);
+                    }
                 }
             }
         }
+
         return listChip;
 
     }
