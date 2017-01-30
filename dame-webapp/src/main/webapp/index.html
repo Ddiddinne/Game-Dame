@@ -7,7 +7,6 @@
 </head>
 <body>
 
-<div id = "token">token:</div>
 <div id = "error"></div>
 <h1 id="title">Play</h1>
 <div id="board"></div>
@@ -46,21 +45,8 @@
                     $("#token").append(data.game.token);
                     console.log(data);
 					token = data.game.token;
-                    //window.location.href = "/dame-webapp?token="+data.game.token;
-                    $.ajax({
-                       url : '/dame-webapp/api/getChips/' + token,
-                       type : 'GET'
-                       })
-                       .done(function(data){
-                            console.log(data);
-                            for(var y=0; y< data.chip.length; y++){
-                                $("#"+data.chip[y].position).addClass("chip"+data.chip[y].piece.toLowerCase());
-                            }
+                    window.location.href = "/dame-webapp?token="+data.game.token;
 
-                       })
-                       .fail(function(jqXHR, textStatus){
-                            console.log(textStatus);
-                       });
 
                })
                .fail(function(jqXHR, textStatus){
@@ -69,7 +55,22 @@
 
 
         }
-        else{$("#title").html("In");}
+        else{
+            $.ajax({
+               url : '/dame-webapp/api/getChips/' + token,
+               type : 'GET'
+               })
+               .done(function(data){
+                    console.log(data);
+                    for(var y=0; y< data.chip.length; y++){
+                        $("#"+data.chip[y].position).addClass("chip"+data.chip[y].piece.toLowerCase());
+                    }
+
+               })
+               .fail(function(jqXHR, textStatus){
+                    console.log(textStatus);
+               });
+        }
 		
 		$(".case").click(function(event){
 		

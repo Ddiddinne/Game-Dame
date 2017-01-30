@@ -58,13 +58,18 @@ public class Service {
         Character rowFinal = casefinal.charAt(1);
 
         if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==1) {
+            String color="";
             for (int i = 0; i < listChip.size(); i++) {
+
                 Chip chip = listChip.get(i);
+                if (chip.getPosition().equals(caseinit)){
+                    color = chip.getPiece();
+                }
                 if (chip.getPosition().equals(casefinal)) {
                     here = false;
                 }
             }
-            if (here) {
+            if (here && ((color.equals("WHITE") && rowFinal-rowInit<0)||(color.equals("BLACK") && rowFinal-rowInit>0))) {
                 for (int j = 0; j < listChip.size(); j++) {
                     Chip chip = listChip.get(j);
                     if (chip.getPosition().equals(caseinit)) {
