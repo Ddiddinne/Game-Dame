@@ -8,12 +8,16 @@
 <body>
 
 <div id = "token">token:</div>
+<div id = "error"></div>
 <h1 id="title">Play</h1>
 <div id="board"></div>
 
 </body>
 
 <script type="text/javascript">
+	var caseinit="";
+	var casefinal="";
+	var token="";
 	$(document).ready(function(e) {
         for(var y=1; y<=8; y++){
 
@@ -35,24 +39,22 @@
         console.log(token);
         if(token==null){
             $.ajax({
-               url : '/dame-webapp/api/createGame',
-               type : 'GET',
+               url : '/dame-webapp/api/game',
+               type : 'POST',
                })
                .done(function(data){
                     $("#token").append(data.game.token);
                     console.log(data);
+					token = data.game.token;
                     //window.location.href = "/dame-webapp?token="+data.game.token;
                     $.ajax({
-                       url : '/dame-webapp/api/getChips/' + data.game.token,
+                       url : '/dame-webapp/api/getChips/' + token,
                        type : 'GET'
                        })
                        .done(function(data){
                             console.log(data);
                             for(var y=0; y< data.chip.length; y++){
-                                console.log(data.chip[y].position + data.chip[y].piece);
-                                console.log($("#data.chip[y].position"));
                                 $("#"+data.chip[y].position).addClass("chip"+data.chip[y].piece.toLowerCase());
-
                             }
 
                        })
@@ -68,6 +70,49 @@
 
         }
         else{$("#title").html("In");}
+		
+		$(".case").click(function(event){
+		
+			if(caseinit=="" || caseinit==event.target.id){
+				if(caseinit==event.target.id){
+					$("#"+caseinit).removeClass("selected");
+					caseinit="";
+				}else{
+					if($("#"+event.target.id).hasClass("chipwhite")||$("#"+event.target.id).hasClass("chipblack")){
+						caseinit=event.target.id;
+						$("#"+caseinit).addClass("selected");
+					}else{
+						$("#error").html("clic on a chip");
+					}
+				}
+				
+			}else{
+				casefinal = event.target.id;
+				$("#"+casefinal).addClass("selected");
+				console.log("init = " + caseinit + " final = "+ casefinal);
+				$.ajax({
+                       url : '/dame-webapp/api/play/' + token,
+                       type : 'GET',
+					   data: {caseinit: caseinit,
+								casefinal:casefinal}
+                       })
+                       .done(function(data){
+                            console.log(data);
+							$(".case").removeClass("chipwhite");
+							$(".case").removeClass("chipblack");
+							$(".case").removeClass("selected");
+							for(var y=0; y< data.chip.length; y++){
+                                $("#"+data.chip[y].position).addClass("chip"+data.chip[y].piece.toLowerCase());
+                            }
+							caseinit="";
+							casefinal="";
+                       })
+                       .fail(function(jqXHR, textStatus){
+                            console.log(textStatus);
+                       });
+			}
+		
+		});
 
 	});
 

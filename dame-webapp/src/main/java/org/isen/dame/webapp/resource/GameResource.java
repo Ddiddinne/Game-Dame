@@ -17,8 +17,8 @@ public class GameResource {
 
     private Service service = new Service();
 
-    @Path("createGame")
-    @GET
+    @Path("game")
+    @POST
     @Produces("application/json")
     public Game createGame() {
         return service.createNewGame();
@@ -30,6 +30,13 @@ public class GameResource {
     public List<Chip> getChips(@PathParam("token") String token) {
         return service.getChips(token);
     }
+
+    @Path("play/{token}")
+    @GET
+    public List<Chip> play(@PathParam("token") String token, @QueryParam("caseinit") String caseinit, @QueryParam("casefinal") String casefinal){
+        return service.play(token, caseinit, casefinal);
+    }
+
 
     @Path("testGame")
     @GET
@@ -44,6 +51,8 @@ public class GameResource {
     public List<Chip> testChip() {
         return service.testChip();
     }
+
+
 
 
     /*@PUT

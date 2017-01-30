@@ -22,11 +22,11 @@ public class DameGameTest {
     @Test
     public void canInstanciateTheGame(){
         assertThat(game).isNotNull();
-        assertThat(game.getCell("A",1)).isEqualTo(Piece.BLACK);
-        assertThat(game.getCell("G",1)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("A",1)).isEqualTo(Piece.BLACK.toString());
+        assertThat(game.getCell("G",1)).isEqualTo(Piece.BLACK.toString());
         assertThat(game.getCell("I",1)).isNull();
         assertThat(game.getCell("B",1)).isNull();
-        assertThat(game.getCell("B",8)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("B",8)).isEqualTo(Piece.WHITE.toString());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class DameGameTest {
         posFinal.column = "B";
         game.play(Piece.BLACK, posInit, posFinal);
         assertThat(game.getCell("A", 3)).isNull();
-        assertThat(game.getCell("B", 4)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("B", 4)).isEqualTo(Piece.BLACK.toString());
 
 
         posInit.row = 3;
@@ -52,7 +52,7 @@ public class DameGameTest {
         direction1.put("x",-1);
         game.play(Piece.BLACK, posInit, posFinal);
         assertThat(game.getCell("E", 3)).isNull();
-        assertThat(game.getCell("D", 4)).isEqualTo(Piece.BLACK);
+        assertThat(game.getCell("D", 4)).isEqualTo(Piece.BLACK.toString());
 
         posInit.row = 6;
         posInit.column = "B";
@@ -60,7 +60,7 @@ public class DameGameTest {
         posFinal.column = "A";
         game.play(Piece.WHITE, posInit, posFinal);
         assertThat(game.getCell("B", 6)).isNull();
-        assertThat(game.getCell("A", 5)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("A", 5)).isEqualTo(Piece.WHITE.toString());
 
         posInit.row = 6;
         posInit.column = "D";
@@ -68,7 +68,7 @@ public class DameGameTest {
         posFinal.column = "E";
         game.play(Piece.WHITE, posInit, posFinal);
         assertThat(game.getCell("D", 6)).isNull();
-        assertThat(game.getCell("E", 5)).isEqualTo(Piece.WHITE);
+        assertThat(game.getCell("E", 5)).isEqualTo(Piece.WHITE.toString());
 
     }
 

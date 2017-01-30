@@ -15,5 +15,19 @@ public class Chip {
     @JsonProperty private String position;
     @JsonProperty private String piece;
 
+    public String getPosition() {
+        return position;
+    }
 
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getPiece() {
+        return piece;
+    }
+
+    public void setPiece(String piece) {
+        this.piece = piece;
+    }
 }

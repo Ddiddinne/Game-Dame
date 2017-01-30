@@ -24,7 +24,7 @@ public class DaoChip {
 
     }
 
-    public void createBoard(String token, String position, Piece piece){
+    public void createBoard(String token, String position, String piece){
 
         dao.insert(token, position, piece.toString());
     }
@@ -32,7 +32,12 @@ public class DaoChip {
     public List<Chip> getChips(String token){
         return dao.getFromToken(token);
     }
+
+    public String getColor(String token, String position){ return dao.getColor(token, position);}
+
     public List<Chip> test(){
         return dao.test();
     }
+
+    public void updateChip(String token, String position, String newposition){dao.updateChip(token, position, newposition);}
 }

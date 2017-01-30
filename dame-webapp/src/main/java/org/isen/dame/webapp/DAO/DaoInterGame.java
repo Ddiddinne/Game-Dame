@@ -23,6 +23,10 @@ public interface DaoInterGame {
     @SqlUpdate("insert into games (token, currentTurn) values (:token, :currentTurn)")
     void insert(@Bind("token") String token, @Bind("currentTurn") String currentTurn);
 
+
+    @SqlQuery("select currentTurn from games where token = :token")
+    String getTurn(@Bind("token") String token);
+
     /*@MapResultAsBean
     @SqlQuery("select token from game where id = :id")
     String test(@Bind("id") int id);*/

@@ -25,7 +25,7 @@ public class Service {
     private DameGameImpl dameGameImpl = new DameGameImpl();
 
     public Game createNewGame(){
-        Map<String, Piece> chips = dameGameImpl.initBoard();
+        Map<String, String> chips = dameGameImpl.initBoard();
         Game game = new Game();
         String token = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
         Piece turn = Piece.WHITE;
@@ -33,7 +33,7 @@ public class Service {
         game.setCurrentTurn(turn);
         daoGame.createGame(token, turn);
 
-        for (Map.Entry<String, Piece> entry : chips.entrySet())
+        for (Map.Entry<String, String> entry : chips.entrySet())
         {
             daoChip.createBoard(token, entry.getKey(), entry.getValue());
         }
@@ -44,6 +44,30 @@ public class Service {
 
     public List<Chip> getChips(String token){
         return daoChip.getChips(token);
+    }
+
+    public List<Chip> play(String token, String caseinit, String casefinal){
+        List<Chip> listChip = daoChip.getChips(token);
+
+        boolean here = true;
+
+        for (int i=0; i<listChip.size(); i++){
+            Chip chip = listChip.get(i);
+            if (chip.getPosition().equals(casefinal)){
+                here = false;
+            }
+        }
+        if(here){
+            for (int j=0; j<listChip.size(); j++) {
+                Chip chip = listChip.get(j);
+                if (chip.getPosition().equals(caseinit)){
+                    chip.setPosition(casefinal);
+                    daoChip.updateChip(token, caseinit, casefinal);
+                }
+            }
+        }
+        return listChip;
+
     }
 
     public List<Game> testGame(){

@@ -9,7 +9,7 @@ public interface DameGame {
 
     void play(Piece color, Position init, Position destination);
 
-    Piece getCell(String column, int row);
+    String getCell(String column, int row);
 
     int getColumnsNumber();
 

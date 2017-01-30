@@ -6,7 +6,7 @@
   <groupId>org.dame.isen.jee</groupId>
   <artifactId>jee-bootstrap-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Puissance 4 :: parent</name>
+  <name>Dame :: parent</name>
   <packaging>pom</packaging>
   <description></description>
 

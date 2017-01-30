@@ -18,10 +18,11 @@ h1{
 }
 
 .case{
-    //border-style: solid;
     width:50px;
     height:50px;
     display:inline-block;
+    border-style: solid;
+    border-color: #ffffff;
 }
 .brown{
     background:#8B4513;
@@ -44,4 +45,9 @@ h1{
 	background-repeat: no-repeat;
 	background-position: center;
 
+}
+
+.selected{
+     border-style: solid;
+     border-color: #0000ff;
 }

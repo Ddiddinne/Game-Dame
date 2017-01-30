@@ -34,6 +34,11 @@ public class DaoGame {
         dao.insert(token, turn.toString());
     }
 
+    public void getTurn(String token){
+
+        dao.getTurn(token);
+    }
+
     public List<Game> test(){
         return dao.test();
     }

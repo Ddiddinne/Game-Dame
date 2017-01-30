@@ -27,4 +27,10 @@ public interface DaoInterChip {
     @SqlQuery("select * from chips where token = :token")
     List<Chip> getFromToken(@Bind("token") String token);
 
+    @SqlQuery("select piece from chips where token = :token and position = :position")
+    String getColor(@Bind("token") String token, @Bind("position") String position);
+
+    @SqlUpdate("update chips set position = :newposition where token = :token and position = :position")
+    void updateChip(@Bind("token") String token, @Bind("position") String position, @Bind("newposition") String newposition);
+
 }
