@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="turn">Turn: <div id='currentTurn'></div></div>
-<div id = "error"></div>
+<div id="error"></div>
 <h1 id="title">Play</h1>
 <div id="board"></div>
 
@@ -17,6 +17,7 @@
 	var caseinit="";
 	var casefinal="";
 	var token="";
+	var end = false;
 	$(document).ready(function(e) {
         for(var y=1; y<=8; y++){
 
@@ -34,7 +35,6 @@
         }
 
         token = getParameterByName('token');
-        console.log(token);
         if(token==null){
             $.ajax({
                url : '/dame-webapp/api/game',
@@ -72,58 +72,64 @@
                });
 
         }
-		
-		$(".case").click(function(event){
-		
-			if(caseinit=="" || caseinit==event.target.id){
-				if(caseinit==event.target.id){
-					$("#"+caseinit).removeClass("selected");
-					caseinit="";
-				}else{
-				console.log($("#currentTurn").text());
-					if(($("#"+event.target.id).hasClass("chipwhite")&& $("#currentTurn").text()=="WHITE")||($("#"+event.target.id).hasClass("chipblack")&& $("#currentTurn").text()=="BLACK")){
-						caseinit=event.target.id;
-						$("#"+caseinit).addClass("selected");
-					}else{
-					    if($("#"+event.target.id).hasClass("chipwhite")||$("#"+event.target.id).hasClass("chipblack")){
-						    $("#error").html("it's not your turn");
-						}else{
-						    $("#error").html("clic on a chip");
-						}
-					}
-				}
-				
-			}else{
-				casefinal = event.target.id;
-				$("#"+casefinal).addClass("selected");
-				console.log("init = " + caseinit + " final = "+ casefinal);
-				$.ajax({
+
+        $(".case").click(function(event)
+        {
+		    if(!end){
+                if(caseinit=="" || caseinit==event.target.id){
+                    if(caseinit==event.target.id){
+                        $("#"+caseinit).removeClass("selected");
+                        caseinit="";
+                    }else{
+                        if(($("#"+event.target.id).hasClass("chipwhite")&& $("#currentTurn").text()=="WHITE")||($("#"+event.target.id).hasClass("chipblack")&& $("#currentTurn").text()=="BLACK")){
+                            caseinit=event.target.id;
+                            $("#"+caseinit).addClass("selected");
+                        }else{
+                            if($("#"+event.target.id).hasClass("chipwhite")||$("#"+event.target.id).hasClass("chipblack")){
+                                $("#error").html("it's not your turn");
+                            }else{
+                                $("#error").html("clic on a chip");
+                            }
+                        }
+                    }
+
+                }else{
+                    casefinal = event.target.id;
+                    $("#"+casefinal).addClass("selected");
+                    $.ajax({
                        url : '/dame-webapp/api/play/' + token,
                        type : 'GET',
-					   data: {caseinit: caseinit,
-								casefinal:casefinal}
+                       data: {caseinit: caseinit,
+                                casefinal:casefinal}
                        })
                        .done(function(data){
                             console.log(data);
                             getTurn(token);
-							$(".case").removeClass("chipwhite");
-							$(".case").removeClass("chipblack");
-							$(".case").removeClass("selected");
-							for(var y=0; y< data.chip.length; y++){
+                            $(".case").removeClass("chipwhite");
+                            $(".case").removeClass("chipblack");
+                            $(".case").removeClass("selected");
+                            for(var y=0; y< data.chip.length; y++){
                                 $("#"+data.chip[y].position).addClass("chip"+data.chip[y].piece.toLowerCase());
+                                for(var i=65; i<=72; i++){
+                                    if(data.chip[y].piece=="BLACK"&& data.chip[y].position==String.fromCharCode(i)+"8"){
+                                        end=true;
+                                        $("#title").html("BLACK win!!!");
+                                    }else if(data.chip[y].piece=="WHITE"&& data.chip[y].position==String.fromCharCode(i)+"1"){
+                                        end=true;
+                                        $("#title").html("WHITE win!!!");
+                                    }
+                                }
                             }
-							caseinit="";
-							casefinal="";
-							$("#error").html("");
-
+                            caseinit="";
+                            casefinal="";
+                            $("#error").html("");
                        })
                        .fail(function(jqXHR, textStatus){
                             console.log(textStatus);
                        });
-			}
-		
+                }
+            }
 		});
-
 	});
 
 	function getParameterByName(name, url) {
@@ -139,13 +145,11 @@
     }
 
     function getTurn(token) {
-    console.log("===============================>In");
         $.ajax({
                url : '/dame-webapp/api/getTurn/' + token,
                type : 'GET'
                })
                .done(function(data){
-                    console.log(data);
                     $("#currentTurn").html(data.game.currentTurn);
                })
                .fail(function(jqXHR, textStatus){

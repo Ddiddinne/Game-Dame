@@ -17,8 +17,9 @@ h1{
     text-align:center;
 }
 
-#token{
-    margin:20px;
+#error{
+    height:20px;
+    margin-top: 10px;
 }
 
 .case{
