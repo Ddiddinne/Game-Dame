@@ -33,4 +33,8 @@ public interface DaoInterChip {
     @SqlUpdate("update chips set position = :newposition where token = :token and position = :position")
     void updateChip(@Bind("token") String token, @Bind("position") String position, @Bind("newposition") String newposition);
 
+
+    @SqlUpdate("DELETE FROM chips where token = :token and position = :position")
+    void removeChip(@Bind("token") String token, @Bind("position") String position);
+
 }

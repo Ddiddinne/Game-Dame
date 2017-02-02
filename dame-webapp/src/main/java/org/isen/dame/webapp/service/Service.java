@@ -10,6 +10,7 @@ import org.isen.dame.webapp.DAO.DaoGame;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,15 +57,21 @@ public class Service {
 
         Character columnFinal = casefinal.charAt(0);
         Character rowFinal = casefinal.charAt(1);
+        String color="";
+        for (int i = 0; i < listChip.size(); i++) {
+
+            Chip chip = listChip.get(i);
+            if (chip.getPosition().equals(caseinit)) {
+                color = chip.getPiece();
+            }
+        }
 
         if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==1) {
-            String color="";
+
             for (int i = 0; i < listChip.size(); i++) {
 
                 Chip chip = listChip.get(i);
-                if (chip.getPosition().equals(caseinit)){
-                    color = chip.getPiece();
-                }
+
                 if (chip.getPosition().equals(casefinal)) {
                     here = false;
                 }
@@ -83,10 +90,13 @@ public class Service {
             Character rowInter = (char)((rowInit+rowFinal)/2);
             String positionInter = columnInter.toString() + rowInter;
             here = false;
-            for (int i = 0; i < listChip.size(); i++) {
-                Chip chip = listChip.get(i);
-                if (chip.getPosition().equals(positionInter)) {
+            List<Chip> listCopy = listChip;
+            for (int i = 0; i < listCopy.size(); i++) {
+                Chip chip = listCopy.get(i);
+                if (chip.getPosition().equals(positionInter) && chip.getPiece()!=color) {
                     here = true;
+                    daoChip.removeChip(token, positionInter);
+                    listChip.remove(i);
                 }
             }
             if(here){

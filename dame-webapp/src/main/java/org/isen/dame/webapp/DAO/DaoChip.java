@@ -40,4 +40,6 @@ public class DaoChip {
     }
 
     public void updateChip(String token, String position, String newposition){dao.updateChip(token, position, newposition);}
+
+    public void removeChip(String token, String position){dao.removeChip(token, position);}
 }
