@@ -6,7 +6,7 @@
     <script type="text/javascript" src="jquery.1.8.3.min.js"></script>
 </head>
 <body>
-<div id="turn">Turn: </div>
+<div id="turn">Turn: <div id='currentTurn'></div></div>
 <div id = "error"></div>
 <h1 id="title">Play</h1>
 <div id="board"></div>
@@ -80,11 +80,16 @@
 					$("#"+caseinit).removeClass("selected");
 					caseinit="";
 				}else{
-					if($("#"+event.target.id).hasClass("chipwhite")||$("#"+event.target.id).hasClass("chipblack")){
+				console.log($("#currentTurn").text());
+					if(($("#"+event.target.id).hasClass("chipwhite")&& $("#currentTurn").text()=="WHITE")||($("#"+event.target.id).hasClass("chipblack")&& $("#currentTurn").text()=="BLACK")){
 						caseinit=event.target.id;
 						$("#"+caseinit).addClass("selected");
 					}else{
-						$("#error").html("clic on a chip");
+					    if($("#"+event.target.id).hasClass("chipwhite")||$("#"+event.target.id).hasClass("chipblack")){
+						    $("#error").html("it's not your turn");
+						}else{
+						    $("#error").html("clic on a chip");
+						}
 					}
 				}
 				
@@ -109,6 +114,7 @@
                             }
 							caseinit="";
 							casefinal="";
+							$("#error").html("");
 
                        })
                        .fail(function(jqXHR, textStatus){
@@ -140,7 +146,7 @@
                })
                .done(function(data){
                     console.log(data);
-                    $("#turn").html("Turn: <div id='currentTurn'>" +data.game.currentTurn + "</div>");
+                    $("#currentTurn").html(data.game.currentTurn);
                })
                .fail(function(jqXHR, textStatus){
                     console.log(textStatus);

@@ -1,5 +1,5 @@
 body{
-	font:normal 20px/0px 'Open Sans',Helvetica,Arial,sans-serif;
+	font:normal 20px/20px 'Open Sans',Helvetica,Arial,sans-serif;
 
 }
 
@@ -7,6 +7,10 @@ h1{
 	text-align: center;
 	margin:100px;
 	font-size: 60px;
+}
+
+#currentTurn{
+    display: inline-block;
 }
 
 #board{
