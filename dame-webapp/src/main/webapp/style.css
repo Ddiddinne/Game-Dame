@@ -1,5 +1,6 @@
 body{
 	font:normal 20px/20px 'Open Sans',Helvetica,Arial,sans-serif;
+	text-align:center;
 
 }
 
@@ -12,14 +13,27 @@ h1{
 #currentTurn{
     display: inline-block;
 }
+#turn{
+    left:0;
+    text-align:left;
+}
 
-#board{
+#reset{
+    margin:30px;
+    padding: 10px;
     text-align:center;
+    display:inline-block;
+    background: #000000;
+    color:#FFFFFF;
+    size: 40px;
+    cursor: pointer;
 }
 
 #error{
     height:20px;
     margin-top: 10px;
+    left:0;
+    text-align:left;
 }
 
 .case{
@@ -31,6 +45,8 @@ h1{
 }
 .brown{
     background:#8B4513;
+    cursor: pointer;
+
 }
 .white{
     background:#FFFFFF;
@@ -42,6 +58,7 @@ h1{
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+
 }
 
 .chipblack{

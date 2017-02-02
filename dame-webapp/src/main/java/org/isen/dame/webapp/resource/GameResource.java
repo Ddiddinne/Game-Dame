@@ -59,6 +59,11 @@ public class GameResource {
         return service.getTurn(token);
     }
 
+    @Path("removeGame/{token}")
+    @POST
+    public void removeGame(@PathParam("token") String token) {
+        service.removeGame(token);
+    }
 
 
 

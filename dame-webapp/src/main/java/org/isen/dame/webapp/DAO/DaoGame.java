@@ -44,4 +44,6 @@ public class DaoGame {
         return dao.test();
     }
 
+    public void removeGame(String token){ dao.removeGame(token);}
+
 }

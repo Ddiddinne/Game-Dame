@@ -133,4 +133,9 @@ public class Service {
     }
 
     public Game getTurn(String token){ return daoGame.getTurn(token);}
+
+    public void removeGame(String token){
+        daoChip.removeGame(token);
+        daoGame.removeGame(token);
+    }
 }

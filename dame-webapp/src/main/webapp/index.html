@@ -10,6 +10,7 @@
 <div id="error"></div>
 <h1 id="title">Play</h1>
 <div id="board"></div>
+<div id="reset">reset</div>
 
 </body>
 
@@ -70,8 +71,32 @@
                .fail(function(jqXHR, textStatus){
                     console.log(textStatus);
                });
-
         }
+
+        $("#reset").click(function(event){
+         $.ajax({
+               url : '/dame-webapp/api/removeGame/' + token,
+               type : 'POST',
+               })
+               .done(function(data){
+                    $.ajax({
+                       url : '/dame-webapp/api/game',
+                       type : 'POST',
+                       })
+                       .done(function(data){
+                            $("#token").append(data.game.token);
+                            console.log(data);
+                            token = data.game.token;
+                            window.location.href = "/dame-webapp?token="+data.game.token;
+                       })
+                       .fail(function(jqXHR, textStatus){
+                            console.log(textStatus);
+                       });
+               })
+               .fail(function(jqXHR, textStatus){
+                    console.log(textStatus);
+               });
+        });
 
         $(".case").click(function(event)
         {
@@ -131,6 +156,8 @@
             }
 		});
 	});
+
+
 
 	function getParameterByName(name, url) {
         if (!url) {

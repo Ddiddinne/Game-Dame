@@ -37,4 +37,7 @@ public interface DaoInterChip {
     @SqlUpdate("DELETE FROM chips where token = :token and position = :position")
     void removeChip(@Bind("token") String token, @Bind("position") String position);
 
+    @SqlUpdate("DELETE FROM chips where token = :token")
+    void removeGame(@Bind("token") String token);
+
 }

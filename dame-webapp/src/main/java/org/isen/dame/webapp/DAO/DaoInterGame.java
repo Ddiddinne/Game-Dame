@@ -30,5 +30,8 @@ public interface DaoInterGame {
     @SqlUpdate("update games set currentTurn = :currentTurn where token = :token")
     void updateTurn(@Bind("currentTurn") String currentTurn, @Bind("token") String token);
 
+    @SqlUpdate("DELETE FROM games where token = :token")
+    void removeGame(@Bind("token") String token);
+
     void close();
 }
