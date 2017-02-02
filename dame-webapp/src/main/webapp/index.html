@@ -6,7 +6,7 @@
     <script type="text/javascript" src="jquery.1.8.3.min.js"></script>
 </head>
 <body>
-
+<div id="turn">Turn: </div>
 <div id = "error"></div>
 <h1 id="title">Play</h1>
 <div id="board"></div>
@@ -27,7 +27,6 @@
                 }else{
                 str+="<div class='case white' id = " + String.fromCharCode(i) + y + "></div>";
                 }
-
             }
             str+="</div>"
             $("#board").append(str);
@@ -56,6 +55,7 @@
 
         }
         else{
+            getTurn(token);
             $.ajax({
                url : '/dame-webapp/api/getChips/' + token,
                type : 'GET'
@@ -70,6 +70,7 @@
                .fail(function(jqXHR, textStatus){
                     console.log(textStatus);
                });
+
         }
 		
 		$(".case").click(function(event){
@@ -99,6 +100,7 @@
                        })
                        .done(function(data){
                             console.log(data);
+                            getTurn(token);
 							$(".case").removeClass("chipwhite");
 							$(".case").removeClass("chipblack");
 							$(".case").removeClass("selected");
@@ -107,6 +109,7 @@
                             }
 							caseinit="";
 							casefinal="";
+
                        })
                        .fail(function(jqXHR, textStatus){
                             console.log(textStatus);
@@ -118,15 +121,30 @@
 	});
 
 	function getParameterByName(name, url) {
-    if (!url) {
-      url = window.location.href;
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+
+    function getTurn(token) {
+    console.log("===============================>In");
+        $.ajax({
+               url : '/dame-webapp/api/getTurn/' + token,
+               type : 'GET'
+               })
+               .done(function(data){
+                    console.log(data);
+                    $("#turn").html("Turn: <div id='currentTurn'>" +data.game.currentTurn + "</div>");
+               })
+               .fail(function(jqXHR, textStatus){
+                    console.log(textStatus);
+               });
+    }
 </script>
 </html>

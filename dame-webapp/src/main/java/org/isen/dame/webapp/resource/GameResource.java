@@ -52,6 +52,13 @@ public class GameResource {
         return service.testChip();
     }
 
+    @Path("getTurn/{token}")
+    @GET
+    @Produces("application/json")
+    public Game getTurn(@PathParam("token") String token) {
+        return service.getTurn(token);
+    }
+
 
 
 

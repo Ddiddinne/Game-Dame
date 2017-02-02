@@ -84,6 +84,7 @@ public class Service {
                         daoChip.updateChip(token, caseinit, casefinal);
                     }
                 }
+                changeTurn(color, token);
             }
         }else if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==2) {
             Character columnInter = (char)((columnInit+columnFinal)/2);
@@ -107,11 +108,20 @@ public class Service {
                         daoChip.updateChip(token, caseinit, casefinal);
                     }
                 }
+                changeTurn(color, token);
             }
         }
 
         return listChip;
 
+    }
+
+    public void changeTurn(String turn, String token){
+        if(turn=="WHITE"){
+            daoGame.updateTurn("BLACK", token);
+        }else{
+            daoGame.updateTurn("WHITE", token);
+        }
     }
 
     public List<Game> testGame(){
@@ -121,4 +131,6 @@ public class Service {
     public List<Chip> testChip(){
         return daoChip.test();
     }
+
+    public Game getTurn(String token){ return daoGame.getTurn(token);}
 }
