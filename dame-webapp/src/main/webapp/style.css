@@ -46,6 +46,7 @@ h1{
 .brown{
     background:#8B4513;
     cursor: pointer;
+    border-color: #8B4513;
 
 }
 .white{

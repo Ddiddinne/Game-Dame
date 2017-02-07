@@ -65,6 +65,15 @@
                     console.log(data);
                     for(var y=0; y< data.chip.length; y++){
                         $("#"+data.chip[y].position).addClass("chip"+data.chip[y].piece.toLowerCase());
+                        for(var i=65; i<=72; i++){
+                            if(data.chip[y].piece=="BLACK"&& data.chip[y].position==String.fromCharCode(i)+"8"){
+                                end=true;
+                                $("#title").html("BLACK win!!!");
+                            }else if(data.chip[y].piece=="WHITE"&& data.chip[y].position==String.fromCharCode(i)+"1"){
+                                end=true;
+                                $("#title").html("WHITE win!!!");
+                            }
+                        }
                     }
 
                })
