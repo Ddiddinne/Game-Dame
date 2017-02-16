@@ -8,7 +8,7 @@ import org.isen.dame.core.Piece;
 import org.isen.dame.webapp.DAO.DaoChip;
 import org.isen.dame.webapp.DAO.DaoGame;
 
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,9 +21,17 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class Service {
-    private DaoGame daoGame = new DaoGame();
-    private DaoChip daoChip = new DaoChip();
-    private DameGameImpl dameGameImpl = new DameGameImpl();
+    private DaoGame daoGame;
+    private DaoChip daoChip;
+    private DameGameImpl dameGameImpl;
+
+    @Inject
+    public Service(DaoGame daoGame, DaoChip daoChip, DameGameImpl dameGameImpl){
+        this.daoGame = daoGame;
+        this.daoChip = daoChip;
+        this.dameGameImpl = dameGameImpl;
+    }
+
 
     public Game createNewGame(){
         Map<String, String> chips = dameGameImpl.initBoard();
