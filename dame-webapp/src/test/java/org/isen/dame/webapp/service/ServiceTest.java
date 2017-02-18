@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -29,13 +30,35 @@ public class ServiceTest {
 
     private Game game;
     private List<Game> list;
+    private Game game2;
+    private List<Chip> chip;
+    //@Before
+    /*public void setUp(){
+        game = new Game();
+        game.setToken("123456789");
+        list = new ArrayList<>();
+        list.add(game);
+        when(daoGame.test()).thenReturn(list);
+    }*/
+
     @Before
     public void setUp(){
         game = new Game();
         game.setToken("123456789");
         list = new ArrayList<>();
         list.add(game);
+
+        //listChip
+        chip=new ArrayList<>();
+        Map<String, String> chips = dameGameimpl.initBoard();
+        for (Map.Entry<String, String> entry : chips.entrySet())
+        {
+            Chip chipValue=new Chip("123456789",entry.getKey(),entry.getValue());
+            chip.add(chipValue);
+        }
+
         when(daoGame.test()).thenReturn(list);
+        when(daoChip.test()).thenReturn(chip);
     }
 
     @Test
@@ -49,7 +72,7 @@ public class ServiceTest {
     @Test
     public void testChips(){
         List<Chip> test = service.testChip();
-        assertEquals(test, daoChip.getChips("123456789"));
+        assertEquals(test, chip);
     }
 
     @Test

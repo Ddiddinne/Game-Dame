@@ -30,4 +30,10 @@ public class Chip {
     public void setPiece(String piece) {
         this.piece = piece;
     }
+
+    public Chip(String token, String position, String piece){
+        this.token=token;
+        this.position=position;
+        this.piece=piece;
+    }
 }
