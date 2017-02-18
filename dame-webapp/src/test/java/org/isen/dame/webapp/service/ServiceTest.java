@@ -62,4 +62,11 @@ public class ServiceTest {
         assertEquals(test, chip);
     }
 
+    @Test
+    public void testTurn(){
+        List<Game> test = service.testGame();
+        Game game=test.get(0);
+        assertEquals(game.getCurrentTurn().toString(),"WHITE");
+    }
+
 }
