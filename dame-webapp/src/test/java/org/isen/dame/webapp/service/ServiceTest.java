@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -48,25 +49,25 @@ public class ServiceTest {
         }
         when(daoGame.test()).thenReturn(list);
         when(daoChip.test()).thenReturn(chip);
+        when(daoGame.getTurn(anyString())).thenReturn(game);
     }
 
     @Test
     public void testGame(){
-        List<Game> test = service.testGame();
-        assertEquals(test, list);
+        List<Game> response = service.testGame();
+        assertEquals(response, list);
     }
 
     @Test
     public void testChips(){
-        List<Chip> test = service.testChip();
-        assertEquals(test, chip);
+        List<Chip> response = service.testChip();
+        assertEquals(response, chip);
     }
 
     @Test
     public void testTurn(){
-        List<Game> test = service.testGame();
-        Game game=test.get(0);
-        assertEquals(game.getCurrentTurn().toString(),"WHITE");
+        Game response = service.getTurn("123456789");
+        assertEquals(response.getCurrentTurn().toString(),"WHITE");
     }
 
 }

@@ -36,4 +36,6 @@ public class Chip {
         this.position=position;
         this.piece=piece;
     }
+
+    public Chip(){}
 }
