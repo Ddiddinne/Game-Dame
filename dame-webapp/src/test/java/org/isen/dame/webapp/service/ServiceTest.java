@@ -4,6 +4,7 @@ import org.isen.dame.core.*;
 import org.isen.dame.webapp.DAO.DaoChip;
 import org.isen.dame.webapp.DAO.DaoGame;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,18 +22,18 @@ import static org.mockito.Mockito.when;
 
 public class ServiceTest {
 
-    private DaoGame daoGame = mock(DaoGame.class);
-    private DaoChip daoChip = mock(DaoChip.class);
-    private DameGameImpl dameGameimpl = new DameGameImpl();
+    private static DaoGame daoGame = mock(DaoGame.class);
+    private static DaoChip daoChip = mock(DaoChip.class);
+    private static DameGameImpl dameGameimpl = new DameGameImpl();
     private Service service = new Service(daoGame, daoChip, dameGameimpl);
 
-    private Game game;
-    private List<Game> list;
+    private static Game game;
+    private static List<Game> list;
     private Game game2;
-    private List<Chip> chip;
+    private static List<Chip> chip;
 
-    @Before
-    public void setUp(){
+    @BeforeClass
+    public static void setUp(){
         game = Game.builder()
                 .token("123456789")
                 .currentTurn(Piece.WHITE.toString())
