@@ -15,7 +15,7 @@ public class DaoChip {
 
     private DaoInterChip dao;
     public DaoChip(){
-        DataSource ds = JdbcConnectionPool.create("jdbc:h2:mem:test",
+        DataSource ds = JdbcConnectionPool.create("jdbc:h2:mem:dame",
                 "sa",
                 "");
         DBI dbi = new DBI(ds);
