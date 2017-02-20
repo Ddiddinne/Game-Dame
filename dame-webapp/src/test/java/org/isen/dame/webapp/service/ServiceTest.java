@@ -33,9 +33,10 @@ public class ServiceTest {
 
     @Before
     public void setUp(){
-        game = new Game();
-        game.setToken("123456789");
-        game.setCurrentTurn(Piece.WHITE);
+        game = Game.builder()
+                .token("123456789")
+                .currentTurn(Piece.WHITE.toString())
+                .build();
         list = new ArrayList<>();
         list.add(game);
 
@@ -44,7 +45,11 @@ public class ServiceTest {
         Map<String, String> chips = dameGameimpl.initBoard();
         for (Map.Entry<String, String> entry : chips.entrySet())
         {
-            Chip chipValue=new Chip("123456789",entry.getKey(),entry.getValue());
+            Chip chipValue = Chip.builder()
+                    .token(game.getToken())
+                    .position(entry.getKey())
+                    .piece(entry.getValue())
+                    .build();
             chip.add(chipValue);
         }
         when(daoGame.test()).thenReturn(list);

@@ -39,7 +39,7 @@ public class Service {
         String token = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
         Piece turn = Piece.WHITE;
         game.setToken(token);
-        game.setCurrentTurn(turn);
+        game.setCurrentTurn(turn.toString());
         daoGame.createGame(token, turn);
 
         for (Map.Entry<String, String> entry : chips.entrySet())
