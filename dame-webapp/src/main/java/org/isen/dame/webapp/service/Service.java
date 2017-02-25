@@ -59,7 +59,7 @@ public class Service {
         List<Chip> listChip = daoChip.getChips(token);
 
         boolean here = true;
-
+        boolean isPiece=false;
         Character columnInit = caseinit.charAt(0);
         Character rowInit = caseinit.charAt(1);
 
@@ -72,54 +72,57 @@ public class Service {
             if (chip.getPosition().equals(caseinit)) {
                 color = chip.getPiece();
             }
-        }
-
-        if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==1) {
-
-            for (int i = 0; i < listChip.size(); i++) {
-
-                Chip chip = listChip.get(i);
-
-                if (chip.getPosition().equals(casefinal)) {
-                    here = false;
-                }
-            }
-            if (here && ((color.equals("WHITE") && rowFinal-rowInit<0)||(color.equals("BLACK") && rowFinal-rowInit>0))) {
-                for (int j = 0; j < listChip.size(); j++) {
-                    Chip chip = listChip.get(j);
-                    if (chip.getPosition().equals(caseinit)) {
-                        chip.setPosition(casefinal);
-                        daoChip.updateChip(token, caseinit, casefinal);
-                    }
-                }
-                changeTurn(color, token);
-            }
-        }else if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==2) {
-            Character columnInter = (char)((columnInit+columnFinal)/2);
-            Character rowInter = (char)((rowInit+rowFinal)/2);
-            String positionInter = columnInter.toString() + rowInter;
-            here = false;
-            List<Chip> listCopy = listChip;
-            for (int i = 0; i < listCopy.size(); i++) {
-                Chip chip = listCopy.get(i);
-                if (chip.getPosition().equals(positionInter) && chip.getPiece()!=color) {
-                    here = true;
-                    daoChip.removeChip(token, positionInter);
-                    listChip.remove(i);
-                }
-            }
-            if(here){
-                for (int j = 0; j < listChip.size(); j++) {
-                    Chip chip = listChip.get(j);
-                    if (chip.getPosition().equals(caseinit)) {
-                        chip.setPosition(casefinal);
-                        daoChip.updateChip(token, caseinit, casefinal);
-                    }
-                }
-                changeTurn(color, token);
+            if (chip.getPosition().equals(casefinal)) {
+                isPiece = true;
             }
         }
+        if(!isPiece){
+            if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==1) {
 
+                for (int i = 0; i < listChip.size(); i++) {
+
+                    Chip chip = listChip.get(i);
+
+                    if (chip.getPosition().equals(casefinal)) {
+                        here = false;
+                    }
+                }
+                if (here && ((color.equals("WHITE") && rowFinal-rowInit<0)||(color.equals("BLACK") && rowFinal-rowInit>0))) {
+                    for (int j = 0; j < listChip.size(); j++) {
+                        Chip chip = listChip.get(j);
+                        if (chip.getPosition().equals(caseinit)) {
+                            chip.setPosition(casefinal);
+                            daoChip.updateChip(token, caseinit, casefinal);
+                        }
+                    }
+                    changeTurn(color, token);
+                }
+            }else if(Math.abs(columnInit-columnFinal)==Math.abs(rowInit-rowFinal) && Math.abs(columnInit-columnFinal)==2) {
+                Character columnInter = (char)((columnInit+columnFinal)/2);
+                Character rowInter = (char)((rowInit+rowFinal)/2);
+                String positionInter = columnInter.toString() + rowInter;
+                here = false;
+                List<Chip> listCopy = listChip;
+                for (int i = 0; i < listCopy.size(); i++) {
+                    Chip chip = listCopy.get(i);
+                    if (chip.getPosition().equals(positionInter) && chip.getPiece()!=color) {
+                        here = true;
+                        daoChip.removeChip(token, positionInter);
+                        listChip.remove(i);
+                    }
+                }
+                if(here){
+                    for (int j = 0; j < listChip.size(); j++) {
+                        Chip chip = listChip.get(j);
+                        if (chip.getPosition().equals(caseinit)) {
+                            chip.setPosition(casefinal);
+                            daoChip.updateChip(token, caseinit, casefinal);
+                        }
+                    }
+                    changeTurn(color, token);
+                }
+            }
+        }
         return listChip;
 
     }

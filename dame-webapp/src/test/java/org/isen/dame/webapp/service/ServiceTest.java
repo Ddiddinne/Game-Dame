@@ -6,6 +6,7 @@ import org.isen.dame.webapp.DAO.DaoGame;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,8 @@ public class ServiceTest {
         when(daoGame.test()).thenReturn(list);
         when(daoChip.test()).thenReturn(chip);
         when(daoGame.getTurn(anyString())).thenReturn(game);
+        when(daoChip.getChips(anyString())).thenReturn(chip);
+        //Mockito.doCallRealMethod().when(daoGame).updateTurn(anyString(),anyString());
     }
 
     @Test
@@ -74,6 +77,39 @@ public class ServiceTest {
     public void testTurn(){
         Game response = service.getTurn("123456789");
         assertEquals(response.getCurrentTurn().toString(),"WHITE");
+        service.changeTurn("BLACK","123456789");
+        response = service.getTurn("123456789");
+        //assertEquals(response.getCurrentTurn().toString(),"BLACK");*/
     }
+
+    @Test
+    public void testPlay(){
+        List<Chip> testChip=service.play("123456789","A7","B8");
+        assertEquals(testChip.get(23).getPosition(), "A7");
+        testChip=service.play("123456789","A7","A8");
+        assertEquals(testChip.get(23).getPosition(), "A7");
+        testChip=service.play("123456789","A7","A6");
+        assertEquals(testChip.get(23).getPosition(), "A7");
+        testChip=service.play("123456789","A7","B6");
+        assertEquals(testChip.get(23).getPosition(), "A7");
+        testChip=service.play("123456789","A7","B7");
+        assertEquals(testChip.get(23).getPosition(), "A7");
+
+        testChip=service.play("123456789","B6","A5");
+        assertEquals(testChip.get(21).getPosition(), "A5");
+        testChip=service.play("123456789","A3","B4");
+        assertEquals(testChip.get(15).getPosition(), "B4");
+        testChip=service.play("123456789","A5","C3");
+        assertEquals(testChip.get(21).getPosition(), "A5");
+
+        testChip=service.play("123456789","D6","E5");
+        assertEquals(testChip.get(18).getPosition(), "E5");
+        testChip=service.play("123456789","C3","D4");
+        assertEquals(testChip.get(11).getPosition(), "D4");
+        testChip=service.play("123456789","A5","C3");
+        assertEquals(testChip.get(20).getPosition(), "C3");
+    }
+
+
 
 }

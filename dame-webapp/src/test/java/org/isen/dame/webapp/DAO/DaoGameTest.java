@@ -62,4 +62,23 @@ public class DaoGameTest {
         assertEquals(response.size(), 1);
         assertEquals(response.get(0).getCurrentTurn(), game1.getCurrentTurn());
     }
+
+    @Test
+    public void testRemove(){
+        List<Game> response = dao.test();
+        assertEquals(response.size(), 2);
+        dao.removeGame(game.getToken());
+        response = dao.test();
+        assertEquals(response.size(), 1);
+    }
+
+    @Test
+    public void testUpdate(){
+        List<Game> response = dao.getTurn(game1.getToken());
+        assertEquals(response.get(0).getCurrentTurn(), "BLACK");
+        dao.updateTurn(game1.getCurrentTurn(), game1.getToken());
+        response = dao.getTurn(game1.getToken());
+        assertEquals(response.size(), 1);
+        assertEquals(response.get(0).getCurrentTurn(), "WHITE");
+    }
 }
