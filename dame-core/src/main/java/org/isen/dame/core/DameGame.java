@@ -1,6 +1,5 @@
 package org.isen.dame.core;
 
-import java.util.HashMap;
 
 /**
  * Created by Sandrine on 09/01/2017.

@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @Getter
 @Setter
-@lombok.Builder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlRootElement

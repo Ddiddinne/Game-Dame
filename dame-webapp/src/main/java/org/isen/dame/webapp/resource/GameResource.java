@@ -1,7 +1,5 @@
 package org.isen.dame.webapp.resource;
 
-
-
 import org.isen.dame.core.Chip;
 import org.isen.dame.core.DameGameImpl;
 import org.isen.dame.core.Game;
@@ -9,22 +7,15 @@ import org.isen.dame.webapp.DAO.DaoChip;
 import org.isen.dame.webapp.DAO.DaoGame;
 import org.isen.dame.webapp.service.Service;
 
-//import javax.inject.Inject;
-import com.google.inject.Inject;
-import javax.inject.Provider;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.Map;
 
 @Produces(MediaType.APPLICATION_JSON)
 public class GameResource {
 
     private final Service service = new Service(new DaoGame(), new DaoChip(), new DameGameImpl());
 
-    /*public GameResource(Service service){
-        this.service = service;
-    }*/
 
     @Path("game")
     @POST

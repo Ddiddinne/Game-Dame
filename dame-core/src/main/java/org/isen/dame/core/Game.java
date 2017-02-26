@@ -2,6 +2,7 @@ package org.isen.dame.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import lombok.experimental.Builder;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

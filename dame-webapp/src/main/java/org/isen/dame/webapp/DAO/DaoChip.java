@@ -2,7 +2,6 @@ package org.isen.dame.webapp.DAO;
 
 import org.h2.jdbcx.JdbcConnectionPool;
 import org.isen.dame.core.Chip;
-import org.isen.dame.core.Piece;
 import org.skife.jdbi.v2.DBI;
 
 import javax.sql.DataSource;

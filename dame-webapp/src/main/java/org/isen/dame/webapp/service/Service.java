@@ -9,12 +9,8 @@ import org.isen.dame.webapp.DAO.DaoChip;
 import org.isen.dame.webapp.DAO.DaoGame;
 
 import com.google.inject.Inject;
-import javax.inject.Provider;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Sandrine on 26/01/2017.

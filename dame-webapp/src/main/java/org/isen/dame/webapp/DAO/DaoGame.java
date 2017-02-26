@@ -1,12 +1,9 @@
 package org.isen.dame.webapp.DAO;
 
-
-import org.apache.commons.lang.RandomStringUtils;
 import org.h2.jdbcx.JdbcConnectionPool;
 import org.isen.dame.core.Game;
 import org.isen.dame.core.Piece;
 import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.Handle;
 
 import javax.sql.DataSource;
 import java.util.List;
