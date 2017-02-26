@@ -1,11 +1,7 @@
 package org.isen.dame.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @Getter
 @Setter
-@lombok.Builder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlRootElement

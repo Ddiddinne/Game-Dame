@@ -32,6 +32,11 @@ public class DaoGameTest {
             .currentTurn(Piece.WHITE.toString())
             .build();
 
+    private static Game game2 = Game.builder()
+            .token("bbbbbbbbb")
+            .currentTurn(Piece.WHITE.toString())
+            .build();
+
     @BeforeClass
     public static void setUpBefore(){
         DataSource ds = JdbcConnectionPool.create("jdbc:h2:mem:test",
@@ -41,6 +46,7 @@ public class DaoGameTest {
         dao = dbi.open(DaoInterGame.class);
         dao.createTable();
         dao.insert(game1.getToken(), game1.getCurrentTurn());
+        dao.insert(game2.getToken(), game2.getCurrentTurn());
     }
     @AfterClass
     public static void setUpAfter(){
@@ -51,9 +57,9 @@ public class DaoGameTest {
     public void testInsert(){
         dao.insert(game.getToken(), game.getCurrentTurn());
         List<Game> response = dao.test();
-        assertEquals(response.size(), 2);
-        assertEquals(response.get(1).getToken(), game.getToken());
-        assertEquals(response.get(1).getCurrentTurn(), game.getCurrentTurn());
+        assertEquals(response.size(), 3);
+        assertEquals(response.get(2).getToken(), game.getToken());
+        assertEquals(response.get(2).getCurrentTurn(), game.getCurrentTurn());
     }
 
     @Test
@@ -66,19 +72,19 @@ public class DaoGameTest {
     @Test
     public void testRemove(){
         List<Game> response = dao.test();
-        assertEquals(response.size(), 2);
+        assertEquals(response.size(), 3);
         dao.removeGame(game.getToken());
         response = dao.test();
-        assertEquals(response.size(), 1);
+        assertEquals(response.size(), 2);
     }
 
     @Test
     public void testUpdate(){
-        List<Game> response = dao.getTurn(game1.getToken());
-        assertEquals(response.get(0).getCurrentTurn(), "BLACK");
-        dao.updateTurn(game1.getCurrentTurn(), game1.getToken());
-        response = dao.getTurn(game1.getToken());
-        assertEquals(response.size(), 1);
+        List<Game> response = dao.getTurn(game2.getToken());
         assertEquals(response.get(0).getCurrentTurn(), "WHITE");
+        dao.updateTurn(Piece.BLACK.toString(), game2.getToken());
+        response = dao.getTurn(game2.getToken());
+        assertEquals(response.size(), 1);
+        assertEquals(response.get(0).getCurrentTurn(), "BLACK");
     }
 }
